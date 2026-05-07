@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Happy Mother's Day ❤️</title>
+
+  <style>
+
+    body{
+      font-family: Arial, sans-serif;
+      background-color: #ffeef2;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      margin:0;
+      padding:20px;
+    }
+
+    .container{
+      background:white;
+      padding:40px;
+      border-radius:20px;
+      max-width:750px;
+      width:100%;
+      text-align:center;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+      position:relative;
+    }
+
+    h1{
+      color:#ff4d79;
+      margin-bottom:25px;
+      font-size:36px;
+      font-weight:bold;
+    }
+
+    .message{
+      color:#444;
+      line-height:1.9;
+      margin-bottom:20px;
+      white-space:pre-line;
+      min-height:260px;
+      text-align:left;
+    }
+
+    .food-section{
+      display:none;
+      animation:fadeIn 0.5s ease;
+    }
+
+    .food-question{
+      color:#ff4d79;
+      font-size:28px;
+      font-weight:bold;
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .buttons{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+      position:relative;
+      min-height:400px;
+    }
+
+    button{
+      border:none;
+      padding:14px 24px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:16px;
+      transition:0.3s ease;
+      font-weight:bold;
+      min-width:280px;
+    }
+
+    button:hover{
+      opacity:0.92;
+    }
+
+    /* FOOD BUTTON COLORS */
+
+    .jollibee{
+      background:#e31b23;
+      color:white;
+    }
+
+    .pizza{
+      background:#ff4d79;
+      color:white;
+    }
+
+    .starbucks{
+      background:#00704a;
+      color:white;
+    }
+
+    .milktea{
+      background:#f5e6cc;
+      color:#5c4033;
+      border:1px solid #e2c9a6;
+    }
+
+    /* NO BUTTON */
+
+    #noBtn{
+      background:black;
+      color:white;
+      position:absolute;
+      bottom:0;
+      transform:scale(1.15);
+    }
+
+    /* POPUPS */
+
+    .popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+      padding:20px;
+    }
+
+    .popup-content{
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      text-align:center;
+      width:100%;
+      max-width:380px;
+      animation:popupShow 0.25s ease;
+    }
+
+    @keyframes popupShow{
+      from{
+        transform:scale(0.9);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    .popup-content h2{
+      margin-bottom:20px;
+      color:#ff4d79;
+    }
+
+    .popup-content p{
+      color:#444;
+      line-height:1.8;
+      margin-bottom:25px;
+      font-size:17px;
+    }
+
+    .popup-buttons{
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .popup-buttons button{
+      min-width:110px;
+      padding:12px;
+    }
+
+    .yes-btn{
+      background:#ff4d79;
+      color:white;
+    }
+
+    .cancel-btn{
+      background:#ddd;
+      color:#333;
+    }
+
+    .cursor{
+      display:inline-block;
+      animation:blink 0.7s infinite;
+    }
+
+    @keyframes blink{
+      50%{
+        opacity:0;
+      }
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:600px){
+
+      .container{
+        padding:25px;
+      }
+
+      h1{
+        font-size:28px;
+      }
+
+      .food-question{
+        font-size:22px;
+      }
+
+      button{
+        width:100%;
+        min-width:unset;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Happy Mother's Day ❤️</h1>
+
+    <div class="message" id="typedMessage"></div>
+
+    <!-- FOOD SECTION -->
+
+    <div class="food-section" id="foodSection">
+
+      <div class="food-question">
+        What food do you want for Mother's Day? 🍽️
+      </div>
+
+      <div class="buttons" id="buttonArea">
+
+        <button class="food-btn jollibee">
+          Jollibee/KFC Bucket Meal 🍗
+        </button>
+
+        <button class="food-btn pizza">
+          Pizza 🍕
+        </button>
+
+        <button class="food-btn starbucks">
+          Starbucks Strawberry Frappe 🍓
+        </button>
+
+        <button class="food-btn milktea">
+          Milktea 🧋
+        </button>
+
+        <button id="noBtn">
+          No 😅
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- NO BUTTON POPUP -->
+
+  <div class="popup" id="popup">
+
+    <div class="popup-content">
+
+      <h2>Are you sure? 🥺</h2>
+
+      <div class="popup-buttons">
+
+        <button class="yes-btn" id="yesBtn">
+          Yes 😭
+        </button>
+
+        <button class="cancel-btn" id="cancelBtn">
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOD CONFIRMATION POPUP -->
+
+  <div class="popup" id="foodPopup">
+
+    <div class="popup-content">
+
+      <h2>
+        Thank you ❤️
+      </h2>
+
+      <p id="foodMessage"></p>
+
+      <div class="popup-buttons">
+
+        <button class="yes-btn" id="closeFoodPopup">
+          Okay ❤️
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // MESSAGE
+
+    const message = `Hi Dya,
+
+Thank you for everything you do - for the love, patience, sacrifices, and care you give to Ady every single day. You are one of the strongest moms I know, I appreciate you more than words can explain. This small webpage is my way of making you smile today ❤️.
+
+Paki-greet nalang din ako sa mom, tita and every mom you know a HAPPY MOTHER'S DAY!
+
+You deserve to rest, eat good food, and feel loved today.`;
+
+    const typedMessage = document.getElementById("typedMessage");
+    const foodSection = document.getElementById("foodSection");
+
+    let index = 0;
+
+    // TYPING EFFECT
+
+    function typeText(){
+
+      if(index < message.length){
+
+        typedMessage.innerHTML =
+          message.substring(0, index + 1) +
+          '<span class="cursor">|</span>';
+
+        index++;
+
+        setTimeout(typeText, 25);
+
+      }else{
+
+        typedMessage.innerHTML = message;
+
+        // SHOW FOOD SECTION AFTER MESSAGE
+        foodSection.style.display = "block";
+
+      }
+
+    }
+
+    typeText();
+
+    // ELEMENTS
+
+    const noBtn = document.getElementById("noBtn");
+    const foodButtons = document.querySelectorAll(".food-btn");
+    const buttonArea = document.getElementById("buttonArea");
+
+    const popup = document.getElementById("popup");
+    const yesBtn = document.getElementById("yesBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    const foodPopup = document.getElementById("foodPopup");
+    const foodMessage = document.getElementById("foodMessage");
+    const closeFoodPopup = document.getElementById("closeFoodPopup");
+
+    let scale = 1;
+    let noClicks = 0;
+    let noBtnScale = 1.15;
+
+    // OPEN POPUP
+
+    noBtn.addEventListener("click", () => {
+
+      popup.style.display = "flex";
+
+    });
+
+    // CANCEL
+
+    cancelBtn.addEventListener("click", () => {
+
+      popup.style.display = "none";
+
+    });
+
+    // YES CLICKED
+
+    yesBtn.addEventListener("click", () => {
+
+      popup.style.display = "none";
+
+      noClicks++;
+
+      // FOOD BUTTONS GROW
+      scale += 0.05;
+
+      foodButtons.forEach(button => {
+
+        button.style.transform = `scale(${scale})`;
+
+      });
+
+      // NO BUTTON SHRINKS
+      noBtnScale -= 0.15;
+
+      noBtn.style.transform = `scale(${noBtnScale})`;
+
+      // MOVE NO BUTTON
+      const maxX = buttonArea.clientWidth - noBtn.offsetWidth;
+      const maxY = buttonArea.clientHeight - noBtn.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+
+      // REMOVE AFTER 3 CLICKS
+      if(noClicks >= 3){
+
+        noBtn.style.display = "none";
+
+      }
+
+    });
+
+    // FOOD BUTTON CLICK
+
+    foodButtons.forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const selectedFood = button.innerText;
+
+        foodMessage.innerHTML = `
+          Treat secured ❤️<br><br>
+          Sure na sa ${selectedFood}?<br><br>
+          Send me your address or GCash Number.
+        `;
+
+        foodPopup.style.display = "flex";
+
+      });
+
+    });
+
+    // CLOSE FOOD POPUP
+
+    closeFoodPopup.addEventListener("click", () => {
+
+      foodPopup.style.display = "none";
+
+    });
+
+  </script>
+
+</body>
+</html>
